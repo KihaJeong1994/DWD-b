@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.mockito.Mockito.verify;
@@ -39,8 +40,9 @@ public class LectureContollerTest {
                 new Lecture("1","스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
         ));
         mockMvc.perform(get("/lecture?site=inflearn&rate=4.0"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
 //                .andExpect(content().string(containsString("스프링")));
+                .andDo(print());
 
     }
 
@@ -52,7 +54,8 @@ public class LectureContollerTest {
         mockMvc.perform(post("/lecture")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
-        ).andExpect(status().isCreated());
+        ).andExpect(status().isCreated())
+        .andDo(print());
 
         verify(lectureService).insertLecture(lecture);
 
