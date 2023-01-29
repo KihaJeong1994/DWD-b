@@ -54,9 +54,18 @@ public class LectureRepositoryTest {
     }
 
     @Test
+    void should_save_and_return_lecture(){
+        Lecture lecture = lectureRepository.save(new Lecture(null, "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
+        assertNotNull(lecture.getId());
+        assertEquals("30개 프로젝트로 배우는 프론트엔드 with React",lecture.getTitle());
+        assertEquals(Site.fastcampus,lecture.getSite());
+        assertEquals(2.9,lecture.getRate());
+    }
+
+    @Test
     void should_return_all(){
         List<Lecture> lectures = lectureRepository.findAll();
-        assertTrue(lectures.size()==dataSets.size());
+        assertEquals(lectures.size(), dataSets.size());
     }
 
     @Test
