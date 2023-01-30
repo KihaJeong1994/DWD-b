@@ -27,9 +27,9 @@ public class LectureServiceTest {
 
     @Test
     void should_return_lecture(){
-        when(lectureRepository.save(new Lecture(null, "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png")))
-                .thenReturn(new Lecture("id", "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
-        Lecture lecture = lectureService.insertLecture(new Lecture(null, "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
+        when(lectureRepository.save(new Lecture("30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png")))
+                .thenReturn(new Lecture("30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
+        Lecture lecture = lectureService.insertLecture(new Lecture("30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
         assertNotNull(lecture);
     }
 
@@ -39,7 +39,7 @@ public class LectureServiceTest {
         Site site = Site.inflearn;
         Double rate = 4.0;
         when(lectureRepository.search(title,site,rate)).thenReturn(Arrays.asList(
-                new Lecture("1","스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
+                new Lecture("스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
         ));
         List<Lecture> lectures = lectureService.searchLecture(title, site, rate);
         assertNotNull(lectures);

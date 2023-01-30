@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/lecture")
 @RequiredArgsConstructor
+@CrossOrigin// TODO : find global option to allow cross origin
 public class LectureController {
 
     private final LectureService lectureService;

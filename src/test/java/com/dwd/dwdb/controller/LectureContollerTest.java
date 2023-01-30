@@ -37,7 +37,7 @@ public class LectureContollerTest {
     @Test
     void should_return_lecture_list() throws Exception {
         when(lectureService.searchLecture(null, Site.inflearn,4.0)).thenReturn(Arrays.asList(
-                new Lecture("1","스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
+                new Lecture("스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
         ));
         mockMvc.perform(get("/lecture?site=inflearn&rate=4.0"))
                 .andExpect(status().isOk())
@@ -48,8 +48,8 @@ public class LectureContollerTest {
 
     @Test
     void should_save_and_return_lecture() throws Exception {
-        Lecture lecture = new Lecture(null, "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png");
-        when(lectureService.insertLecture(lecture)).thenReturn(new Lecture("1", "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
+        Lecture lecture = new Lecture("30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png");
+        when(lectureService.insertLecture(lecture)).thenReturn(new Lecture("30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
         String content = "{\"title\": \"30개 프로젝트로 배우는 프론트엔드 with React\", \"site\": \"fastcampus\", \"rate\": 2.9, \"image\": \"lecture4.png\"}";
         mockMvc.perform(post("/lecture")
                         .contentType(MediaType.APPLICATION_JSON)
