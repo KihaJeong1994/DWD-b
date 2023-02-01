@@ -20,7 +20,8 @@ public class LectureReview {
     @LastModifiedDate
     private Instant updatedAt;
 
-    public LectureReview(String lectureId, String review, String createdBy, double rate){
+    public LectureReview(String id, String lectureId, String review, String createdBy, double rate){
+        this.id = id;
         this.lectureId = lectureId;
         this.review = review;
         this.createdBy = createdBy;
