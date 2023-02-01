@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,9 +39,9 @@ public class LectureRepositoryTest {
     }
 
     private List<Lecture> dataSets = Arrays.asList(
-            new Lecture("스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png")
-            ,new Lecture("10개 프로젝트로 완성하는 백엔드 웹개발(Java/Spring)", Site.fastcampus,3.5,"lecture2.png")
-            ,new Lecture("[코드팩토리] [입문] Dart 언어 4시간만에 완전정복", Site.inflearn,5.0,"lecture3.png")
+            new Lecture(null,"스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png","abc.com","very good")
+            ,new Lecture(null,"10개 프로젝트로 완성하는 백엔드 웹개발(Java/Spring)", Site.fastcampus,3.5,"lecture2.png","abc.com","very good")
+            ,new Lecture(null,"[코드팩토리] [입문] Dart 언어 4시간만에 완전정복", Site.inflearn,5.0,"lecture3.png","abc.com","very good")
     );
 
     @BeforeEach
@@ -55,7 +56,7 @@ public class LectureRepositoryTest {
 
     @Test
     void should_save_and_return_lecture(){
-        Lecture lecture = lectureRepository.save(new Lecture( "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png"));
+        Lecture lecture = lectureRepository.save(new Lecture(null, "30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png","abc.com","very good"));
         assertNotNull(lecture.getId());
         assertEquals("30개 프로젝트로 배우는 프론트엔드 with React",lecture.getTitle());
         assertEquals(Site.fastcampus,lecture.getSite());
@@ -85,5 +86,14 @@ public class LectureRepositoryTest {
         Double rate = 4.0;
         List<Lecture> lectures = lectureRepository.search(title, site, rate);
         assertEquals(1,lectures.size());
+    }
+
+    @Test
+    void should_return_lecture_with_id_a(){
+        Lecture lecture = lectureRepository.save(new Lecture( null,"30개 프로젝트로 배우는 프론트엔드 with React", Site.fastcampus, 2.9, "lecture4.png","abc.com","very good"));
+        assertNotNull(lecture.getId());
+        Optional<Lecture> lectureWithId = lectureRepository.findById(lecture.getId());
+        assertTrue(lectureWithId.isPresent());
+        assertEquals("30개 프로젝트로 배우는 프론트엔드 with React",lectureWithId.get().getTitle());
     }
 }
