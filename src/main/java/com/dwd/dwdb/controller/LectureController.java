@@ -5,6 +5,8 @@ import com.dwd.dwdb.exception.ResourceNotFoundException;
 import com.dwd.dwdb.model.Lecture;
 import com.dwd.dwdb.service.LectureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,11 @@ public class LectureController {
     private final LectureService lectureService;
 
     @GetMapping("")
-    ResponseEntity<List<Lecture>> searchLectures(@RequestParam(required = false) String title, @RequestParam(required = false) Site site, @RequestParam(required = false) Double rate){
-        List<Lecture> lectures = lectureService.searchLecture(title, site, rate);
+    ResponseEntity<Page<Lecture>> searchLectures(@RequestParam(required = false) String title
+            , @RequestParam(required = false) Site site
+            , @RequestParam(required = false) Double rate
+             , Pageable pageable){
+        Page<Lecture> lectures = lectureService.searchLecture(title, site, rate,pageable);
         return new ResponseEntity<>(lectures,HttpStatus.OK);
     }
 

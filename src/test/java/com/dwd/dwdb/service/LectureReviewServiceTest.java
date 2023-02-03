@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -31,11 +32,13 @@ public class LectureReviewServiceTest {
 
     @Test
     void should_save_and_return_review(){
-        LectureReview review = new LectureReview(null, "1", "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
+        String lectureId = "1";
+        LectureReview review = new LectureReview(null, lectureId, "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
         when(lectureReviewRepository.save(review)).thenReturn(review);
+        when(lectureReviewRepository.getAvgRate(lectureId)).thenReturn(4.75);
         LectureReview lectureReview = lectureReviewService.insertLectureReview(review);
         assertNotNull(lectureReview);
-        // TODO : lecture에 저장되어있는 rate 값 갱신 확인 + 갱신 로직
+        verify(lectureRepository).findAndSetRateById(lectureId,4.8);
 
     }
 

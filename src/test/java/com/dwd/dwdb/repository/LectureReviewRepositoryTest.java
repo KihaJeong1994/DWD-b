@@ -74,4 +74,13 @@ public class LectureReviewRepositoryTest {
         }
         assertTrue(reviews.get(0).getUpdatedAt().compareTo(reviews.get(1).getUpdatedAt())>0);
     }
+
+    @Test
+    void should_return_average_of_rate_where_id_1(){
+        String lectureId = "1";
+        Double avg = lectureReviewRepository.getAvgRate(lectureId);
+        assertEquals((5.0+4.5)/2.0,avg);
+    }
+
+
 }

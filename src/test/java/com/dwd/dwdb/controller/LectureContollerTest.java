@@ -6,16 +6,22 @@ import com.dwd.dwdb.model.Lecture;
 import com.dwd.dwdb.service.LectureService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -42,9 +48,9 @@ public class LectureContollerTest {
 
     @Test
     void should_return_lecture_list() throws Exception {
-        when(lectureService.searchLecture(null, Site.inflearn,4.0)).thenReturn(Arrays.asList(
-                new Lecture(null,"스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png","abc.com","very good")
-        ));
+        Page<Lecture> expectedLectures = new PageImpl<>(Collections.emptyList());
+        Pageable pageable = PageRequest.of(0,20);
+        when(lectureService.searchLecture(null, Site.inflearn,4.0,pageable)).thenReturn(expectedLectures);
         mockMvc.perform(get("/lecture?site=inflearn&rate=4.0"))
                 .andExpect(status().isOk())
 //                .andExpect(content().string(containsString("스프링")));

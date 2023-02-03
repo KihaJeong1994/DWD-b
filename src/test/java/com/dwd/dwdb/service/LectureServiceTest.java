@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
@@ -40,10 +44,10 @@ public class LectureServiceTest {
         String title =  null;
         Site site = Site.inflearn;
         Double rate = 4.0;
-        when(lectureRepository.search(title,site,rate)).thenReturn(Arrays.asList(
-                new Lecture("1","스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png","abc.com","very good")
-        ));
-        List<Lecture> lectures = lectureService.searchLecture(title, site, rate);
+        Page<Lecture> pro= Mockito.mock(Page.class);
+        Pageable pageable = PageRequest.of(0,20);
+        when(lectureRepository.search(title,site,rate,pageable)).thenReturn(pro);
+        Page<Lecture> lectures = lectureService.searchLecture(title, site, rate,pageable);
         assertNotNull(lectures);
     }
 

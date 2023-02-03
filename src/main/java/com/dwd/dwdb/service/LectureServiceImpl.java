@@ -5,6 +5,8 @@ import com.dwd.dwdb.exception.ResourceNotFoundException;
 import com.dwd.dwdb.model.Lecture;
 import com.dwd.dwdb.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class LectureServiceImpl implements LectureService{
     private final LectureRepository lectureRepository;
 
     @Override
-    public List<Lecture> searchLecture(String title, Site site, Double rate) {
-        return lectureRepository.search(title,site,rate);
+    public Page<Lecture> searchLecture(String title, Site site, Double rate, Pageable pageable) {
+        return lectureRepository.search(title,site,rate,pageable);
     }
 
     @Override

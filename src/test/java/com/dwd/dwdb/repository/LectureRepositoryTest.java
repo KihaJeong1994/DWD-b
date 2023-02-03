@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -39,7 +42,7 @@ public class LectureRepositoryTest {
     }
 
     private List<Lecture> dataSets = Arrays.asList(
-            new Lecture(null,"스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png","abc.com","very good")
+            new Lecture("1","스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술", Site.inflearn,4.3,"lecture1.png","abc.com","very good")
             ,new Lecture(null,"10개 프로젝트로 완성하는 백엔드 웹개발(Java/Spring)", Site.fastcampus,3.5,"lecture2.png","abc.com","very good")
             ,new Lecture(null,"[코드팩토리] [입문] Dart 언어 4시간만에 완전정복", Site.inflearn,5.0,"lecture3.png","abc.com","very good")
     );
@@ -75,8 +78,9 @@ public class LectureRepositoryTest {
         String title = "스프링";
         Site site = null;
         Double rate = null;
-        List<Lecture> lectures = lectureRepository.search(title, site, rate);
-        assertEquals(1,lectures.size());
+        Pageable pageable = PageRequest.of(0,20);
+        Page<Lecture> lectures = lectureRepository.search(title, site, rate,pageable);
+        assertEquals(1,lectures.getNumberOfElements());
     }
 
     @Test
@@ -84,8 +88,9 @@ public class LectureRepositoryTest {
         String title =  null;
         Site site = Site.inflearn;
         Double rate = 4.0;
-        List<Lecture> lectures = lectureRepository.search(title, site, rate);
-        assertEquals(1,lectures.size());
+        Pageable pageable = PageRequest.of(0,20);
+        Page<Lecture> lectures = lectureRepository.search(title, site, rate, pageable);
+        assertEquals(1,lectures.getNumberOfElements());
     }
 
     @Test
@@ -95,5 +100,12 @@ public class LectureRepositoryTest {
         Optional<Lecture> lectureWithId = lectureRepository.findById(lecture.getId());
         assertTrue(lectureWithId.isPresent());
         assertEquals("30개 프로젝트로 배우는 프론트엔드 with React",lectureWithId.get().getTitle());
+    }
+
+    @Test
+    void should_update_rate_by_3(){
+        lectureRepository.findAndSetRateById("1",4.0);
+        Optional<Lecture> lecture = lectureRepository.findById("1");
+        assertEquals(4.0, lecture.get().getRate());
     }
 }
