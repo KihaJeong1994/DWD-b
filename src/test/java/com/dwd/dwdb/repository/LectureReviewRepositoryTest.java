@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -67,12 +70,13 @@ public class LectureReviewRepositoryTest {
 
     @Test
     void should_return_review_with_lectureId_1(){
-        List<LectureReview> reviews = lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc("1");
-        assertEquals(2,reviews.size());
+        Pageable pageable = PageRequest.of(0,20);
+        Page<LectureReview> reviews = lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc("1",pageable);
+        assertEquals(2,reviews.getContent().size());
         for(var r : reviews){
             System.out.println(r.getUpdatedAt());
         }
-        assertTrue(reviews.get(0).getUpdatedAt().compareTo(reviews.get(1).getUpdatedAt())>0);
+        assertTrue(reviews.getContent().get(0).getUpdatedAt().compareTo(reviews.getContent().get(1).getUpdatedAt())>0);
     }
 
     @Test

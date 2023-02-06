@@ -4,6 +4,8 @@ import com.dwd.dwdb.model.LectureReview;
 import com.dwd.dwdb.repository.LectureRepository;
 import com.dwd.dwdb.repository.LectureReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class LectureReviewServiceImpl implements LectureReviewService{
     private final LectureReviewRepository lectureReviewRepository;
     private final LectureRepository lectureRepository;
     @Override
-    public List<LectureReview> getLectureReviewByLectureId(String lectureId) {
-        return lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc(lectureId);
+    public Page<LectureReview> getLectureReviewByLectureId(String lectureId, Pageable pageable) {
+        return lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc(lectureId,pageable);
     }
 
     @Override

@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -48,10 +52,12 @@ public class LectureReviewControllerTest {
     @Test
     void should_return_reviews() throws Exception {
         String lectureId = "1";
-        when(lectureReviewService.getLectureReviewByLectureId(lectureId)).thenReturn(Arrays.asList(
+        Pageable pageable = PageRequest.of(0,20);
+        Page<LectureReview> expectedLectures = new PageImpl<>(Arrays.asList(
                 new LectureReview("gaec","1","너무너무 좋은 강의입니다!","Flutter꿈나무",5)
                 ,new LectureReview("etecae","1","어서 다음 강의 출시 해주세요~","스프링master",4.5)
         ));
+        when(lectureReviewService.getLectureReviewByLectureId(lectureId,pageable)).thenReturn(expectedLectures);
         mockMvc.perform(get("/lecture/1/review"))
                 .andExpect(status().isOk())
                 .andDo(print());

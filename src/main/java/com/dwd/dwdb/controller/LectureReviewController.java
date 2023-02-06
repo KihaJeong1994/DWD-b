@@ -3,6 +3,8 @@ package com.dwd.dwdb.controller;
 import com.dwd.dwdb.model.LectureReview;
 import com.dwd.dwdb.service.LectureReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,8 @@ public class LectureReviewController {
     private final LectureReviewService lectureReviewService;
 
     @GetMapping("/{lectureId}/review")
-    ResponseEntity<List<LectureReview>> getLectureReviewById(@PathVariable("lectureId") String lectureId){
-        return new ResponseEntity<>(lectureReviewService.getLectureReviewByLectureId(lectureId), HttpStatus.OK);
+    ResponseEntity<Page<LectureReview>> getLectureReviewById(@PathVariable("lectureId") String lectureId, Pageable pageable){
+        return new ResponseEntity<>(lectureReviewService.getLectureReviewByLectureId(lectureId,pageable), HttpStatus.OK);
     }
 
     @PostMapping("/{lectureId}/review")
