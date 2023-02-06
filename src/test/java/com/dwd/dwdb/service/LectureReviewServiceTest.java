@@ -55,7 +55,7 @@ public class LectureReviewServiceTest {
                 new LectureReview("gaec","1","너무너무 좋은 강의입니다!","Flutter꿈나무",5)
                 ,new LectureReview("etecae","1","어서 다음 강의 출시 해주세요~","스프링master",4.5)
         ));
-        when(lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc(lectureId,pageable)).thenReturn(expectedLectures);
+        when(lectureReviewRepository.findByLectureId(lectureId,pageable)).thenReturn(expectedLectures);
         Page<LectureReview> reviews = lectureReviewService.getLectureReviewByLectureId(lectureId,pageable);
         for (var r : reviews){
             assertEquals("1",r.getLectureId());

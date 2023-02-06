@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -70,8 +71,8 @@ public class LectureReviewRepositoryTest {
 
     @Test
     void should_return_review_with_lectureId_1(){
-        Pageable pageable = PageRequest.of(0,20);
-        Page<LectureReview> reviews = lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc("1",pageable);
+        Pageable pageable = PageRequest.of(0,20, Sort.by(Sort.Direction.DESC,"updatedAt"));
+        Page<LectureReview> reviews = lectureReviewRepository.findByLectureId("1",pageable);
         assertEquals(2,reviews.getContent().size());
         for(var r : reviews){
             System.out.println(r.getUpdatedAt());

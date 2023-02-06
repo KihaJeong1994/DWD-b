@@ -18,7 +18,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
     private final LectureRepository lectureRepository;
     @Override
     public Page<LectureReview> getLectureReviewByLectureId(String lectureId, Pageable pageable) {
-        return lectureReviewRepository.findByLectureIdOrderByUpdatedAtDesc(lectureId,pageable);
+        return lectureReviewRepository.findByLectureId(lectureId,pageable);
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface LectureReviewRepository extends MongoRepository<LectureReview,String>  {
-    Page<LectureReview> findByLectureIdOrderByUpdatedAtDesc(String lectureId, Pageable pageable);
+    Page<LectureReview> findByLectureId(String lectureId, Pageable pageable);
 
     @Aggregation(pipeline = {
             "{$match:{lectureId:?0}}"
