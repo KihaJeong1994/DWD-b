@@ -1,10 +1,11 @@
 package com.dwd.dwdb.service.auth;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.dwd.dwdb.enums.ErrorCode;
+import com.dwd.dwdb.exception.CustomRuntimeException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -61,12 +62,24 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(getSignInKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            throw new CustomRuntimeException(ErrorCode.JWT_TOKEN_EXPIRED);
+        } catch (UnsupportedJwtException e) {
+            throw new CustomRuntimeException(ErrorCode.UNSUPPORTED_JWT_TOKEN);
+        } catch (MalformedJwtException e) {
+            throw new CustomRuntimeException(ErrorCode.INVALID_JWT_TOKEN);
+        } catch (SignatureException e) {
+            throw new CustomRuntimeException(ErrorCode.INVALID_JWT_SIGNATURE);
+        } catch (IllegalArgumentException e) {
+            throw new CustomRuntimeException(ErrorCode.INVALID_JWT_ARGUMENT);
+        }
     }
 
     private Key getSignInKey() {
