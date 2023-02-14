@@ -25,7 +25,7 @@ public class AuthController {
         try{
             authResponse = authService.register(request);
         } catch (CustomRuntimeException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse(e.getErrorCode().getCode(),e.getErrorCode().getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponse(e.getCode(),e.getMessage()));
         }
 
         return ResponseEntity.ok(authResponse);
