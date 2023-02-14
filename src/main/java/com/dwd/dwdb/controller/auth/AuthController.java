@@ -7,6 +7,7 @@ import com.dwd.dwdb.dto.RegisterRequest;
 import com.dwd.dwdb.exception.CustomRuntimeException;
 import com.dwd.dwdb.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +22,13 @@ public class AuthController {
     public ResponseEntity<?> register(
             @RequestBody RegisterRequest request
     ) {
-        AuthenticationResponse authResponse=null;
         try{
-            authResponse = authService.register(request);
+            authService.register(request);
         } catch (CustomRuntimeException e) {
             return ResponseEntity.badRequest().body(new ErrorResponse(e.getCode(),e.getMessage()));
         }
 
-        return ResponseEntity.ok(authResponse);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
     @PostMapping("/signin")
     public ResponseEntity<AuthenticationResponse> authenticate(
