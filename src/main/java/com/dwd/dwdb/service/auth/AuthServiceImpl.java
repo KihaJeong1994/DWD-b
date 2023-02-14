@@ -3,7 +3,9 @@ package com.dwd.dwdb.service.auth;
 import com.dwd.dwdb.dto.AuthenticationRequest;
 import com.dwd.dwdb.dto.AuthenticationResponse;
 import com.dwd.dwdb.dto.RegisterRequest;
+import com.dwd.dwdb.enums.ErrorCode;
 import com.dwd.dwdb.enums.Role;
+import com.dwd.dwdb.exception.CustomRuntimeException;
 import com.dwd.dwdb.model.user.User;
 import com.dwd.dwdb.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,12 @@ public class AuthServiceImpl implements AuthService{
     private final JwtService jwtService;
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        if(userRepository.existsByUserId(request.getUserId())){
+            throw new CustomRuntimeException(ErrorCode.USERID_ALREADY_EXISTS);
+        };
+        if(userRepository.existsByEmail(request.getEmail())){
+            throw new CustomRuntimeException(ErrorCode.EMAIL_ALREADY_EXISTS);
+        };
         User user = User.builder()
                 .userId(request.getUserId())
                 .email(request.getEmail())
