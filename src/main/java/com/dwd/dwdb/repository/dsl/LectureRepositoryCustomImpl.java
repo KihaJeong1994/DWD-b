@@ -54,6 +54,12 @@ public class LectureRepositoryCustomImpl extends QuerydslRepositorySupport imple
             } else {
                 return lecture.updatedAt.desc();
             }
+        }else if (orderProperty.equals("reviewsCnt")) {
+            if (order.getDirection() == Sort.Direction.ASC) {
+                return lecture.reviewsCnt.asc();
+            } else {
+                return lecture.reviewsCnt.desc();
+            }
         }
         // add additional cases for other sort properties as needed
         // ...
