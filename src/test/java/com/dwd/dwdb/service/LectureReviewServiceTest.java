@@ -1,6 +1,5 @@
 package com.dwd.dwdb.service;
 
-import com.dwd.dwdb.model.Lecture;
 import com.dwd.dwdb.model.LectureReview;
 import com.dwd.dwdb.repository.LectureRepository;
 import com.dwd.dwdb.repository.LectureReviewRepository;
@@ -15,9 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -41,9 +37,10 @@ public class LectureReviewServiceTest {
         LectureReview review = new LectureReview(null, lectureId, "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
         when(lectureReviewRepository.save(review)).thenReturn(review);
         when(lectureReviewRepository.getAvgRate(lectureId)).thenReturn(4.75);
+        when(lectureReviewRepository.countByLectureId(lectureId)).thenReturn(2);
         LectureReview lectureReview = lectureReviewService.insertLectureReview(review);
         assertNotNull(lectureReview);
-        verify(lectureRepository).findAndSetRateById(lectureId,4.8);
+        verify(lectureRepository).findAndSetRateAndReviewsCntById(lectureId,4.8,2);
 
     }
 

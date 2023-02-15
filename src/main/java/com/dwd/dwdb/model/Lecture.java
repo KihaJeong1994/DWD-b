@@ -8,7 +8,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
 
@@ -22,6 +21,7 @@ public class Lecture {
     private String title,image,url,description;
     private Site site;
     private Double rate;
+    private int reviewsCnt;
     @CreatedDate
     private Instant createdAt;
     @LastModifiedDate

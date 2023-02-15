@@ -104,8 +104,11 @@ public class LectureRepositoryTest {
 
     @Test
     void should_update_rate_by_3(){
-        lectureRepository.findAndSetRateById("1",4.0);
+        lectureRepository.findAndSetRateAndReviewsCntById("1",4.0,2);
         Optional<Lecture> lecture = lectureRepository.findById("1");
         assertEquals(4.0, lecture.get().getRate());
+        assertEquals(2, lecture.get().getReviewsCnt());
     }
+
+
 }

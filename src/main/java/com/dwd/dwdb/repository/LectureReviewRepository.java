@@ -6,8 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
-
 public interface LectureReviewRepository extends MongoRepository<LectureReview,String>  {
     Page<LectureReview> findByLectureId(String lectureId, Pageable pageable);
 
@@ -17,4 +15,5 @@ public interface LectureReviewRepository extends MongoRepository<LectureReview,S
     })
     Double getAvgRate(String lectureId);
 
+    int countByLectureId(String lectureId);
 }

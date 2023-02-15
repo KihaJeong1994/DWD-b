@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.Update;
 
 public interface LectureRepository extends MongoRepository<Lecture,String> , LectureRepositoryCustom {
 
-    @Update("{$set:{'rate':?1}}")
-    void findAndSetRateById(String id, Double rate);
+    @Update("{$set:{'rate':?1,'reviewsCnt':?2}}")
+    void findAndSetRateAndReviewsCntById(String id, Double rate, int reviewsCnt);
 }

@@ -87,5 +87,12 @@ public class LectureReviewRepositoryTest {
         assertEquals((5.0+4.5)/2.0,avg);
     }
 
+    @Test
+    void should_return_count_where_id_1(){
+        String lectureId = "1";
+        int cnt = lectureReviewRepository.countByLectureId(lectureId);
+        assertEquals(2,cnt);
+    }
+
 
 }

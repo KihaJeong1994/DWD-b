@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class LectureReviewServiceImpl implements LectureReviewService{
@@ -26,7 +24,8 @@ public class LectureReviewServiceImpl implements LectureReviewService{
         LectureReview lectureReviewSaved = lectureReviewRepository.save(lectureReview);
         String lectureId = lectureReviewSaved.getLectureId();
         Double roundAvgRate = Math.round(lectureReviewRepository.getAvgRate(lectureId)*10D)/10D;
-        lectureRepository.findAndSetRateById(lectureId,roundAvgRate);
+        int reviewsCnt = lectureReviewRepository.countByLectureId(lectureId);
+        lectureRepository.findAndSetRateAndReviewsCntById(lectureId,roundAvgRate,reviewsCnt);
         return lectureReviewSaved;
     }
 }
