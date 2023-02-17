@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -57,6 +58,40 @@ public class LectureReviewServiceTest {
         for (var r : reviews){
             assertEquals("1",r.getLectureId());
         }
+    }
+
+    @Test
+    void should_update_review_and_lecture_rate(){
+        String lectureId = "1";
+        LectureReview review = new LectureReview("tacera", lectureId, "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
+        when(lectureReviewRepository.findById(review.getId())).thenReturn(Optional.of(review));
+        when(lectureReviewRepository.save(review)).thenReturn(review);
+        when(lectureReviewRepository.getAvgRate(lectureId)).thenReturn(4.5);
+        when(lectureReviewRepository.countByLectureId(lectureId)).thenReturn(2);
+        LectureReview lectureReview = lectureReviewService.updateLectureReview(review);
+        verify(lectureRepository).findAndSetRateAndReviewsCntById(lectureId,4.5,2);
+        assertNotNull(lectureReview);
+
+    }
+
+    @Test
+    void should_throw_illegalArgumentException_when_no_review(){
+        String lectureId = "1";
+        LectureReview review = new LectureReview("tacera", lectureId, "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
+        when(lectureReviewRepository.findById(review.getId())).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,()->lectureReviewService.updateLectureReview(review));
+    }
+
+    @Test
+    void should_delete_review_with_id_tacera_and_change_lecture_avgRate_and_reviewsCnt(){
+        String reviewId = "tacera";
+        String lectureId = "1";
+        LectureReview review = new LectureReview(reviewId, lectureId, "너무너무 좋은 강의입니다!", "Flutter꿈나무", 5);
+        when(lectureReviewRepository.findById(reviewId)).thenReturn(Optional.of(review));
+        when(lectureReviewRepository.getAvgRate(lectureId)).thenReturn(4.5);
+        when(lectureReviewRepository.countByLectureId(lectureId)).thenReturn(2);
+        lectureReviewService.deleteLectureReviewById(reviewId);
+        verify(lectureRepository).findAndSetRateAndReviewsCntById(lectureId,4.5,2);
     }
 
 }

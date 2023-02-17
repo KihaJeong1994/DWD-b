@@ -18,8 +18,10 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,7 +43,7 @@ public class LectureReviewRepositoryTest {
 
     private List<LectureReview> dataSets = Arrays.asList(
             new LectureReview(null,"1","너무너무 좋은 강의입니다!","Flutter꿈나무",5)
-            ,new LectureReview(null,"1","어서 다음 강의 출시 해주세요~","스프링master",4.5)
+            ,new LectureReview("gcaewor","1","어서 다음 강의 출시 해주세요~","스프링master",4.5)
             ,new LectureReview(null,"2","별로인듯;;","노잼충",2.5)
             ,new LectureReview(null,"3","짱짱맨;;","obejcetc",4.0)
             ,new LectureReview(null,"3","별로인듯;;","노잼충",2.5)
@@ -92,6 +94,25 @@ public class LectureReviewRepositoryTest {
         String lectureId = "1";
         int cnt = lectureReviewRepository.countByLectureId(lectureId);
         assertEquals(2,cnt);
+    }
+
+    @Test
+    void should_set_review_as_follow(){
+        LectureReview reviewChanged = new LectureReview("gcaewor", "1", "다시 생각해보니 들을만 한듯?", "스프링master", 5.0);
+        Optional<LectureReview> optionalReview = lectureReviewRepository.findById(reviewChanged.getId());
+        Instant updatedAtBefore = optionalReview.get().getUpdatedAt();
+        assertTrue(optionalReview.isPresent());
+        if(optionalReview.isPresent()){
+            LectureReview review = optionalReview.get();
+            review.setReview(reviewChanged.getReview());
+            review.setRate(reviewChanged.getRate());
+            LectureReview save = lectureReviewRepository.save(review);
+            assertNotNull(save);
+        }
+        LectureReview saved = lectureReviewRepository.findById(reviewChanged.getId()).get();
+        assertEquals(reviewChanged.getReview(),saved.getReview());
+        assertEquals(reviewChanged.getRate(),saved.getRate());
+        assertTrue(saved.getUpdatedAt().isAfter(updatedAtBefore));
     }
 
 

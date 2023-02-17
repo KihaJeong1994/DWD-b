@@ -28,4 +28,23 @@ public class LectureReviewController {
     ResponseEntity<LectureReview> insertLectureReview(@PathVariable("lectureId") String lectureId,@RequestBody LectureReview lectureReview){
         return new ResponseEntity<>(lectureReviewService.insertLectureReview(lectureReview), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{lectureId}/review")
+    ResponseEntity<LectureReview> updateLectureReview(@RequestBody LectureReview reviewChanged){
+        try {
+            return ResponseEntity.ok(lectureReviewService.updateLectureReview(reviewChanged));
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping("/{lectureId}/review")
+    ResponseEntity<?> deleteLectureReviewById(@RequestParam String id){
+        try {
+            lectureReviewService.deleteLectureReviewById(id);
+            return ResponseEntity.ok().build();
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

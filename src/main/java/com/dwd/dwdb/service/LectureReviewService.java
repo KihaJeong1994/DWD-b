@@ -10,4 +10,8 @@ public interface LectureReviewService {
     Page<LectureReview> getLectureReviewByLectureId(String lectureId, Pageable pageable);
 
     LectureReview insertLectureReview(LectureReview lectureReview);
+
+    LectureReview updateLectureReview(LectureReview lectureReview);
+
+    void deleteLectureReviewById(String id);
 }
