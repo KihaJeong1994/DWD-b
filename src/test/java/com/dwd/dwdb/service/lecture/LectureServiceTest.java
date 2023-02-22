@@ -1,4 +1,4 @@
-package com.dwd.dwdb.service;
+package com.dwd.dwdb.service.lecture;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.exception.ResourceNotFoundException;

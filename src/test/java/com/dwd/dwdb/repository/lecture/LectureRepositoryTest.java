@@ -1,4 +1,4 @@
-package com.dwd.dwdb.repository;
+package com.dwd.dwdb.repository.lecture;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.model.lecture.Lecture;

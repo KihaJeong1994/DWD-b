@@ -1,4 +1,4 @@
-package com.dwd.dwdb.service;
+package com.dwd.dwdb.service.lecture;
 
 import com.dwd.dwdb.model.lecture.LectureReview;
 import com.dwd.dwdb.repository.lecture.LectureRepository;
