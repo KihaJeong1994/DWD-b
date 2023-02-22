@@ -1,6 +1,6 @@
-package com.dwd.dwdb.repository;
+package com.dwd.dwdb.repository.lecture;
 
-import com.dwd.dwdb.model.LectureReview;
+import com.dwd.dwdb.model.lecture.LectureReview;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Aggregation;

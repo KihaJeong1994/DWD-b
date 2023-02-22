@@ -1,7 +1,7 @@
 package com.dwd.dwdb.repository.dsl;
 
 import com.dwd.dwdb.enums.Site;
-import com.dwd.dwdb.model.Lecture;
+import com.dwd.dwdb.model.lecture.Lecture;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import io.micrometer.common.util.StringUtils;
@@ -15,7 +15,7 @@ import org.springframework.data.support.PageableExecutionUtils;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.dwd.dwdb.model.QLecture.lecture;
+import static com.dwd.dwdb.model.lecture.QLecture.lecture;
 
 public class LectureRepositoryCustomImpl extends QuerydslRepositorySupport implements LectureRepositoryCustom {
 

@@ -1,15 +1,14 @@
-package com.dwd.dwdb.service;
+package com.dwd.dwdb.service.lecture;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.exception.ResourceNotFoundException;
-import com.dwd.dwdb.model.Lecture;
-import com.dwd.dwdb.repository.LectureRepository;
+import com.dwd.dwdb.model.lecture.Lecture;
+import com.dwd.dwdb.repository.lecture.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

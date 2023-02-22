@@ -1,4 +1,4 @@
-package com.dwd.dwdb.model;
+package com.dwd.dwdb.model.lecture;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

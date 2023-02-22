@@ -1,7 +1,7 @@
 package com.dwd.dwdb.controller;
 
-import com.dwd.dwdb.model.LectureReview;
-import com.dwd.dwdb.service.LectureReviewService;
+import com.dwd.dwdb.model.lecture.LectureReview;
+import com.dwd.dwdb.service.lecture.LectureReviewService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 

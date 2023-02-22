@@ -1,4 +1,4 @@
-package com.dwd.dwdb.model;
+package com.dwd.dwdb.model.lecture;
 
 import com.dwd.dwdb.enums.Site;
 import lombok.AllArgsConstructor;

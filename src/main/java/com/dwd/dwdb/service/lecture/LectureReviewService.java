@@ -1,10 +1,8 @@
-package com.dwd.dwdb.service;
+package com.dwd.dwdb.service.lecture;
 
-import com.dwd.dwdb.model.LectureReview;
+import com.dwd.dwdb.model.lecture.LectureReview;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 public interface LectureReviewService {
     Page<LectureReview> getLectureReviewByLectureId(String lectureId, Pageable pageable);

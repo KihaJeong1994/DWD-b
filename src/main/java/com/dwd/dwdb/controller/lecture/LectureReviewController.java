@@ -1,15 +1,13 @@
-package com.dwd.dwdb.controller;
+package com.dwd.dwdb.controller.lecture;
 
-import com.dwd.dwdb.model.LectureReview;
-import com.dwd.dwdb.service.LectureReviewService;
+import com.dwd.dwdb.model.lecture.LectureReview;
+import com.dwd.dwdb.service.lecture.LectureReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/lecture")

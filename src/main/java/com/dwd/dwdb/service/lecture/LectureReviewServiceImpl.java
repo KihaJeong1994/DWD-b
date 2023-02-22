@@ -1,8 +1,8 @@
-package com.dwd.dwdb.service;
+package com.dwd.dwdb.service.lecture;
 
-import com.dwd.dwdb.model.LectureReview;
-import com.dwd.dwdb.repository.LectureRepository;
-import com.dwd.dwdb.repository.LectureReviewRepository;
+import com.dwd.dwdb.model.lecture.LectureReview;
+import com.dwd.dwdb.repository.lecture.LectureRepository;
+import com.dwd.dwdb.repository.lecture.LectureReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,6 +56,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
             lectureReviewRepository.deleteById(id);
             int cnt = lectureReviewRepository.countByLectureId(lectureId);
             Double avgRate = lectureReviewRepository.getAvgRate(lectureId);
+            if(avgRate==null) avgRate=0.0;
             lectureRepository.findAndSetRateAndReviewsCntById(lectureId,avgRate,cnt);
         }else {
             throw new IllegalArgumentException("LectureReview with id:"+id+" is not found");

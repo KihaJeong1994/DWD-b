@@ -1,6 +1,7 @@
 package com.dwd.dwdb.repository;
 
-import com.dwd.dwdb.model.LectureReview;
+import com.dwd.dwdb.model.lecture.LectureReview;
+import com.dwd.dwdb.repository.lecture.LectureReviewRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,6 +88,13 @@ public class LectureReviewRepositoryTest {
         String lectureId = "1";
         Double avg = lectureReviewRepository.getAvgRate(lectureId);
         assertEquals((5.0+4.5)/2.0,avg);
+    }
+
+    @Test
+    void should_return_0_for_average_of_rate_where_id_4(){
+        String lectureId = "4";
+        Double avg = lectureReviewRepository.getAvgRate(lectureId);
+        assertEquals(null,avg);
     }
 
     @Test

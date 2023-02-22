@@ -2,8 +2,9 @@ package com.dwd.dwdb.service;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.exception.ResourceNotFoundException;
-import com.dwd.dwdb.model.Lecture;
-import com.dwd.dwdb.repository.LectureRepository;
+import com.dwd.dwdb.model.lecture.Lecture;
+import com.dwd.dwdb.repository.lecture.LectureRepository;
+import com.dwd.dwdb.service.lecture.LectureServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,10 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;

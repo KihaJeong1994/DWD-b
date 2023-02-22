@@ -1,7 +1,8 @@
 package com.dwd.dwdb.repository;
 
 import com.dwd.dwdb.enums.Site;
-import com.dwd.dwdb.model.Lecture;
+import com.dwd.dwdb.model.lecture.Lecture;
+import com.dwd.dwdb.repository.lecture.LectureRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

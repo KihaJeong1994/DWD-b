@@ -1,6 +1,6 @@
-package com.dwd.dwdb.repository;
+package com.dwd.dwdb.repository.lecture;
 
-import com.dwd.dwdb.model.Lecture;
+import com.dwd.dwdb.model.lecture.Lecture;
 import com.dwd.dwdb.repository.dsl.LectureRepositoryCustom;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Update;

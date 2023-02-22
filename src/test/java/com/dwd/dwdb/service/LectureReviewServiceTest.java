@@ -1,8 +1,9 @@
 package com.dwd.dwdb.service;
 
-import com.dwd.dwdb.model.LectureReview;
-import com.dwd.dwdb.repository.LectureRepository;
-import com.dwd.dwdb.repository.LectureReviewRepository;
+import com.dwd.dwdb.model.lecture.LectureReview;
+import com.dwd.dwdb.repository.lecture.LectureRepository;
+import com.dwd.dwdb.repository.lecture.LectureReviewRepository;
+import com.dwd.dwdb.service.lecture.LectureReviewServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

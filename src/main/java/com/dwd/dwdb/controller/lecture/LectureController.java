@@ -1,9 +1,9 @@
-package com.dwd.dwdb.controller;
+package com.dwd.dwdb.controller.lecture;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.exception.ResourceNotFoundException;
-import com.dwd.dwdb.model.Lecture;
-import com.dwd.dwdb.service.LectureService;
+import com.dwd.dwdb.model.lecture.Lecture;
+import com.dwd.dwdb.service.lecture.LectureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
