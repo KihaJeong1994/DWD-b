@@ -1,4 +1,4 @@
-package com.dwd.dwdb.repository.dsl;
+package com.dwd.dwdb.repository.lecture.dsl;
 
 import com.dwd.dwdb.enums.Site;
 import com.dwd.dwdb.model.lecture.Lecture;
@@ -86,6 +86,6 @@ public class LectureRepositoryCustomImpl extends QuerydslRepositorySupport imple
         if(StringUtils.isEmpty(title)){
             return null;
         }
-        return lecture.title.contains(title);
+        return lecture.title.containsIgnoreCase(title);
     }
 }
