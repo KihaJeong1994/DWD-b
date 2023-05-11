@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,7 +34,8 @@ import static org.mockito.Mockito.verify;
 //@WebMvcTest(LectureController.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@Disabled// TODO : test without spring security
+@WithMockUser
+//@Disabled// TODO : test without spring security
 public class LectureContollerTest {
 
     @Autowired
